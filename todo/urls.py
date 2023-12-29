@@ -5,8 +5,9 @@ from . import views
 urlpatterns = [
         path('', views.homepage, name=''),  # Endpoint for the todo view
         path('register/', views.register, name='register'),
-        path('my_login/', views.my_login, name='my_login'),
+        path('my_login/', views.my_login, name='login'),
         path('dashboard/', views.dashboard, name='dashboard'),
+        path('logout_user/', views.logout_user, name='logout'),
 ]
 
 htmxpatterns = [
