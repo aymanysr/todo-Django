@@ -13,6 +13,7 @@ class Todos(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     TodoList = models.ForeignKey(TodoList, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class SharedTodoList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
