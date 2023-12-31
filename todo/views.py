@@ -39,7 +39,8 @@ def my_login(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'todo/dashboard.html')
+    todos = Todos.objects.filter(user=request.user).order_by('-id')
+    return render(request, 'todo/dashboard.html', {'todos': todos})
 
 def logout_user(request):
     logout(request)
@@ -51,11 +52,13 @@ def index(request):
     pass
 
 # Creating a new Todo
+@login_required(login_url='login')
 def create_todo(request):
     title = request.POST.get('title')
-    todo = Todos.objects.create(title=title)
+    user = request.user
+    todo = Todos.objects.create(title=title, user=user)
     todo.save()
-    todos = Todos.objects.all().order_by('-id')
+    todos = Todos.objects.filter(user=user).order_by('-id')
     return render(request, 'todo/todo-list.html', {'todos': todos})
 
 
@@ -64,7 +67,7 @@ def mark_todo(request, pk):
     todo = Todos.objects.get(pk=pk)
     todo.completed = not todo.completed
     todo.save()
-    todos = Todos.objects.all().order_by('-id')
+    todos = Todos.objects.filter(user=request.user).order_by('-id')
     return render(request, 'todo/todo-list.html', {'todos': todos})
 
 # Deleting a Todo
