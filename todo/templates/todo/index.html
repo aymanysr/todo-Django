@@ -2,9 +2,11 @@
 {% block title %} Homepage {% endblock %}
 
 {% block content %}
-<html>
-  <h2>This is the Homepage</h2>
-  <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
-  <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
-</html>
+  <h2 class="d-flex justify-content-center">This is the Homepage</h2>
+  {% if user.is_authenticated %}
+    <h3>Welcome {{ user.username }}</h3>
+  {% else %}
+    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+    <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
+  {% endif %}
 {% endblock %}
