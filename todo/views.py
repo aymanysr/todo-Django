@@ -73,6 +73,8 @@ def mark_todo(request, pk):
 # Deleting a Todo
 def delete_todo(request, pk):
     todo = Todos.objects.get(pk=pk)
+    if todo.user != request.user:
+        return redirect('dashboard')
     todo.delete()
     todos = Todos.objects.all().order_by('-id')
     return render(request, 'todo/todo-list.html', {'todos': todos})
