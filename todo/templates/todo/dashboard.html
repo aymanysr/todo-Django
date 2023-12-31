@@ -2,8 +2,6 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
 
-<a href="{% url 'logout' %}" class="btn btn-danger float-end">Logout</a>
-
 <h3 class="my-5">Welcome to Your Todo List</h3>
 <form hx-post="{% url 'create_todo' %}" hx-target="#todoList" class="mx-auto">
     {% csrf_token %}
