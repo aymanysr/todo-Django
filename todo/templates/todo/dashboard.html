@@ -3,19 +3,19 @@
 {% block content %}
 
 <h3 class="my-5">Welcome to Your Todo List</h3>
-<form hx-post="{% url 'create_todo' %}" hx-target="#todoList" class="mx-auto">
+<form hx-post="{% url 'create_todolist' %}" hx-target="#todoList" class="mx-auto">
     {% csrf_token %}
     <div class="mb-3 row align-items-center">
-        <label for="todoText" class="col-auto col-form-label">Enter your todo here: </label>
+        <label for="todolistTitle" class="col-auto col-form-label">Enter your todo list title here: </label>
         <div class="col-6">
-            <input type="text" name="title" class="form-control" id="todoText" required>
+            <input type="text" name="title" class="form-control" id="todolistTitle" required>
         </div>
         <div class="col-auto">
-            <button class="btn btn-success">Add</button>
+            <button class="btn btn-success">Create Todo List</button>
         </div>
     </div>
 </form>
-<div id="todoList">
+<div id="todoList" class="d-flex flex-wrap space-evenly">
     {% include 'todo/todo-list.html' %}
 </div>
 
